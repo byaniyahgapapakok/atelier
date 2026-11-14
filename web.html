@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bian Punya — Cuman Anak Sekolah</title>
+<meta name="description" content="Portfolio of Bian, a creative developer building fast, considered digital products.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Bian — Creative Developer">
+<meta property="og:description" content="Fast, considered digital products from pixel to production.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23fff' stroke-width='2' stroke-dasharray='4 3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Hanken+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<noscript><style>[data-reveal],.mask>span,.ch{opacity:1!important;transform:none!important;clip-path:none!important}#preloader{display:none}body.loading{overflow:auto}</style></noscript>
+
+<style>
+/* =====================================================================
+   DESIGN TOKENS — hitam, putih, abu. Ganti warna / font di sini.
+   ===================================================================== */
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{
+  --bg:#000;
+  --surface:#0b0b0b;
+  --fg:#f5f5f5;
+  --fg-2:#c4c4c4;
+  --mute:#868686;
+  --dim:#4b4b4b;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.2);
+  --pad:clamp(20px,4vw,64px);
+  --f-display:'Anybody','Arial Narrow',system-ui,sans-serif;
+  --f-body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+/* ===================== BASE ===================== */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:var(--f-body);font-size:17px;line-height:1.55;font-weight:400;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+}
+body.loading,body.menu-open,body.lb-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+ul{list-style:none}
+::selection{background:#fff;color:#000}
+:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:4px}
+.small{font-size:13px;color:var(--mute);letter-spacing:.01em}
+section,footer{position:relative;z-index:1}
+.wrap{padding:0 var(--pad);max-width:1720px;margin:0 auto}
+.sec{padding:clamp(90px,13vw,190px) 0}
+
+/* ===================== BACKGROUND ===================== */
+.bg-grid,.bg-glow,.bg-vig,.grain{position:fixed;inset:0;pointer-events:none}
+.bg-grid,.bg-glow{z-index:0;background-size:76px 76px}
+.bg-grid{
+  background-image:
+    linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px);
+  -webkit-mask-image:radial-gradient(ellipse 95% 85% at 50% 35%,#000 25%,transparent 100%);
+          mask-image:radial-gradient(ellipse 95% 85% at 50% 35%,#000 25%,transparent 100%);
+}
+.bg-glow{
+  background-image:
+    linear-gradient(to right,rgba(255,255,255,.28) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(255,255,255,.28) 1px,transparent 1px);
+  -webkit-mask-image:radial-gradient(240px circle at var(--mx,50%) var(--my,40%),#000,transparent 72%);
+          mask-image:radial-gradient(240px circle at var(--mx,50%) var(--my,40%),#000,transparent 72%);
+}
+.bg-vig{z-index:0;background:linear-gradient(to bottom,rgba(0,0,0,.65),transparent 18%,transparent 80%,rgba(0,0,0,.8))}
+.orb{
+  position:fixed;left:0;top:0;z-index:0;pointer-events:none;border-radius:50%;
+  width:62vmax;height:62vmax;margin:-31vmax 0 0 -31vmax;filter:blur(50px);will-change:transform;
+}
+.orb.o1{background:radial-gradient(circle,rgba(255,255,255,.085),transparent 62%)}
+.orb.o2{background:radial-gradient(circle,rgba(150,150,150,.1),transparent 60%);width:48vmax;height:48vmax;margin:-24vmax 0 0 -24vmax}
+.grain{
+  z-index:3;opacity:.07;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===================== PRELOADER ===================== */
+#preloader{
+  position:fixed;inset:0;z-index:10000;background:#000;color:#fff;
+  transition:transform 1.2s var(--ease) .15s;
+}
+#preloader::after{
+  content:'';position:absolute;left:0;right:0;top:99%;height:14vh;background:#000;
+  border-radius:0 0 50% 50%/0 0 100% 100%;
+}
+#preloader.done{transform:translateY(-115%)}
+.pre-top{position:absolute;left:var(--pad);right:var(--pad);top:28px;display:flex;justify-content:space-between;font-size:13px;color:var(--mute)}
+.pre-word{
+  position:absolute;left:var(--pad);top:50%;transform:translateY(-50%);
+  font-family:var(--f-display);font-weight:300;font-variation-settings:'wdth' 140;
+  font-size:clamp(1.4rem,3.6vw,3rem);color:var(--fg-2);
+}
+.pre-num{
+  position:absolute;right:var(--pad);bottom:clamp(30px,5vw,60px);
+  font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 100;
+  font-size:clamp(6rem,24vw,22rem);line-height:.78;letter-spacing:-.04em;
+  background:linear-gradient(180deg,#fff 10%,#333 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.pre-bar{position:absolute;left:0;bottom:0;height:3px;width:100%;background:rgba(255,255,255,.08)}
+.pre-bar i{display:block;height:100%;width:0;background:#fff}
+
+/* ===================== CURSOR (hanya perangkat dengan mouse) ===================== */
+.cursor-dot,.cursor-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:9999;display:none;will-change:transform}
+body.has-cursor .cursor-dot,body.has-cursor .cursor-ring{display:grid}
+body.has-cursor,body.has-cursor a,body.has-cursor button,body.has-cursor [role=button]{cursor:none}
+.cursor-dot{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#fff;mix-blend-mode:difference}
+.cursor-ring{
+  width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.6);place-items:center;
+  transition:width .45s var(--ease),height .45s var(--ease),margin .45s var(--ease),background .3s,border-color .3s,opacity .3s;
+}
+.cursor-ring b{font-size:12px;font-weight:600;color:#000;opacity:0;transition:opacity .25s;letter-spacing:.02em}
+.cursor-ring.hover{width:68px;height:68px;margin:-34px 0 0 -34px;background:rgba(255,255,255,.14);border-color:transparent}
+.cursor-ring.view{width:96px;height:96px;margin:-48px 0 0 -48px;background:#fff;border-color:#fff}
+.cursor-ring.view b{opacity:1}
+
+/* ===================== HEADER + MENU ===================== */
+.hdr{
+  position:fixed;left:0;right:0;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:calc(16px + env(safe-area-inset-top)) var(--pad) 16px;
+  transition:transform .7s var(--ease),background .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+.hdr.scrolled{background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-color:var(--line)}
+.hdr.hide{transform:translateY(-110%)}
+body.menu-open .hdr{transform:none!important;background:transparent;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+.logo{font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 125;font-size:24px;letter-spacing:-.03em;line-height:1}
+.logo sup{font-size:.4em;font-weight:400;margin-left:2px;vertical-align:top;position:relative;top:-.2em}
+.nav{display:flex;gap:clamp(18px,2.6vw,40px)}
+.roll{display:inline-block;overflow:hidden;height:1.35em;line-height:1.35em;font-size:15px;font-weight:500;color:var(--fg-2)}
+.roll span{display:block;position:relative;transition:transform .55s var(--ease)}
+.roll span::after{content:attr(data-t);position:absolute;left:0;top:100%;color:#fff}
+.roll:hover span,.roll.active span{transform:translateY(-100%)}
+.hdr-r{display:flex;align-items:center;gap:14px}
+.pill{display:inline-flex;align-items:center;gap:9px;font-size:13px;padding:9px 15px;border:1px solid var(--line-2);border-radius:999px;color:var(--fg-2)}
+.pill i{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}70%{box-shadow:0 0 0 9px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.burger{display:none;width:48px;height:48px;border:1px solid var(--line-2);border-radius:50%;position:relative}
+.burger i{position:absolute;left:15px;right:15px;height:1.5px;background:#fff;transition:transform .5s var(--ease),top .5s var(--ease)}
+.burger i:nth-child(1){top:19px}
+.burger i:nth-child(2){top:27px}
+body.menu-open .burger i:nth-child(1){top:23px;transform:rotate(45deg)}
+body.menu-open .burger i:nth-child(2){top:23px;transform:rotate(-45deg)}
+
+.menu{
+  position:fixed;inset:0;z-index:90;background:#000;
+  padding:calc(110px + env(safe-area-inset-top)) var(--pad) calc(32px + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;justify-content:space-between;
+  clip-path:circle(0 at calc(100% - 44px) 40px);visibility:hidden;
+  transition:clip-path .95s var(--ease),visibility 0s linear .95s;
+}
+.menu::before{
+  content:'';position:absolute;inset:0;z-index:-1;
+  background-image:linear-gradient(to right,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:linear-gradient(to bottom,#000,transparent 85%);mask-image:linear-gradient(to bottom,#000,transparent 85%);
+}
+body.menu-open .menu{clip-path:circle(150% at calc(100% - 44px) 40px);visibility:visible;transition:clip-path .95s var(--ease),visibility 0s}
+.menu li{overflow:hidden}
+.menu li a{
+  display:block;padding:4px 0;
+  font-family:var(--f-display);font-weight:700;font-variation-settings:'wdth' 110;
+  font-size:clamp(2.6rem,13vw,5rem);line-height:1.05;letter-spacing:-.03em;
+  transform:translateY(110%);transition:transform .9s var(--ease);
+}
+body.menu-open .menu li a{transform:none;transition-delay:calc(.28s + var(--i)*.07s)}
+.menu-foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--mute);font-size:14px}
+.menu-foot a{color:var(--fg-2)}
+
+/* Penanda section di sisi kanan (desktop) */
+.rail{position:fixed;right:clamp(14px,2vw,28px);top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:14px;align-items:flex-end}
+.rail a{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--mute)}
+.rail a span{opacity:0;transform:translateX(8px);transition:opacity .4s,transform .5s var(--ease)}
+.rail a i{display:block;height:1px;width:14px;background:var(--dim);transition:width .6s var(--ease),background .3s}
+.rail a:hover span,.rail a.active span{opacity:1;transform:none;color:#fff}
+.rail a.active i{width:42px;background:#fff}
+.rail a:hover i{background:#fff}
+
+/* Tombol yang ikut scroll: cincin progres + teks berputar */
+.toTop{
+  position:fixed;right:clamp(14px,2.2vw,32px);bottom:clamp(14px,2.2vw,32px);z-index:60;
+  width:84px;height:84px;border-radius:50%;
+  background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  opacity:0;transform:scale(.6);pointer-events:none;transition:opacity .5s,transform .7s var(--ease);
+}
+.toTop.show{opacity:1;transform:none;pointer-events:auto}
+.toTop svg{position:absolute;inset:0;width:100%;height:100%}
+.toTop .txt{animation:rot 14s linear infinite;transform-origin:50% 50%}
+.toTop text{font-size:8.6px;fill:#bdbdbd;font-family:var(--f-body);font-weight:600;letter-spacing:.5px}
+.toTop .ring-bg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1.5}
+.toTop .ring-p{fill:none;stroke:#fff;stroke-width:1.5;stroke-dasharray:289;stroke-dashoffset:289;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%}
+.toTop .arrow{position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;transition:transform .5s var(--ease)}
+.toTop:hover .arrow{transform:translateY(-4px)}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* ===================== REVEAL ===================== */
+[data-reveal]{
+  opacity:0;transform:translateY(18px);
+  transition:opacity 1.1s var(--ease),transform 1.3s var(--ease);
+  transition-delay:calc(var(--d,0)*1s);
+}
+[data-reveal].in{opacity:1;transform:none}
+[data-reveal=line],[data-reveal=clip]{opacity:1;transform:none}
+[data-reveal=clip]{clip-path:inset(0 0 100% 0);transition:clip-path 1.7s var(--ease);transition-delay:calc(var(--d,0)*1s)}
+[data-reveal=clip].in{clip-path:inset(0 0 0 0)}
+.mask{display:block;overflow:hidden;padding:0 .06em .12em 0;margin-bottom:-.12em}
+.mask>span{display:block;transform:translateY(108%);transition:transform 1.3s var(--ease);transition-delay:calc(var(--d,0)*1s)}
+.mask.in>span{transform:none}
+
+/* ===================== HEADINGS (huruf "membuka" lebar saat muncul) ===================== */
+.h2{
+  font-family:var(--f-display);font-weight:800;line-height:.95;letter-spacing:-.035em;
+  font-size:clamp(2.5rem,8.4vw,8.4rem);
+}
+.h2 .mask>span{
+  font-variation-settings:'wdth' 52;
+  transition:transform 1.3s var(--ease),font-variation-settings 1.9s var(--ease);
+  transition-delay:calc(var(--d,0)*1s);
+}
+.h2 .mask.in>span{font-variation-settings:'wdth' 108}
+/* gradasi putih ke abu, dipasang langsung di span yang berisi teks */
+.h2 .mask>span,.mega .mask>span{
+  background:linear-gradient(180deg,#fff 25%,#5a5a5a 108%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sec-head{
+  position:relative;display:grid;grid-template-columns:1fr minmax(0,330px);gap:32px;align-items:end;
+  padding-top:32px;margin-bottom:clamp(44px,6vw,90px);
+}
+.sec-head::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,#fff,rgba(255,255,255,.08));
+  transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ease);
+}
+.sec-head.in::before{transform:none}
+.sec-note{color:var(--mute);font-size:16px;padding-bottom:.6em}
+
+/* ===================== BUTTONS ===================== */
+.btn{
+  position:relative;display:inline-flex;align-items:center;gap:.6em;
+  padding:16px 28px;border-radius:999px;font-weight:600;font-size:15px;
+  border:1px solid var(--line-2);overflow:hidden;isolation:isolate;transition:color .45s,border-color .45s;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;z-index:-1;background:#fff;
+  transform:translateY(102%);border-radius:50% 50% 0 0/100% 100% 0 0;
+  transition:transform .6s var(--ease),border-radius .6s var(--ease);
+}
+.btn:hover{color:#000;border-color:#fff}
+.btn:hover::before{transform:none;border-radius:0}
+.btn.solid{background:#fff;color:#000;border-color:#fff}
+.btn.solid::before{background:#202020}
+.btn.solid:hover{color:#fff}
+.ico{width:15px;height:15px;flex:none;transition:transform .5s var(--ease)}
+.btn:hover .ico{transform:translate(2px,-2px)}
+
+/* ===================== PLACEHOLDER GAMBAR (otomatis kalau file belum ada) ===================== */
+.ph{position:relative;overflow:hidden;background:linear-gradient(150deg,#1a1a1a,#0a0a0a)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease),filter .8s}
+.ph.missing img{display:none}
+.ph.missing::before{content:'';position:absolute;inset:0}
+.ph.missing::after{
+  content:attr(data-label);position:absolute;left:16px;bottom:14px;right:16px;
+  font-size:12px;color:var(--mute);letter-spacing:.02em;
+}
+.ph[data-art=rings].missing::before{background:repeating-radial-gradient(circle at 72% 38%,transparent 0 16px,rgba(255,255,255,.08) 16px 17px)}
+.ph[data-art=lines].missing::before{background:repeating-linear-gradient(115deg,transparent 0 13px,rgba(255,255,255,.07) 13px 14px)}
+.ph[data-art=dots].missing::before{background:radial-gradient(rgba(255,255,255,.22) 1px,transparent 1.6px) 0 0/18px 18px}
+.ph[data-art=conic].missing::before{background:conic-gradient(from 210deg at 62% 48%,#242424,#0a0a0a,#303030,#0a0a0a,#242424)}
+.ph[data-art=person].missing::before{
+  background:
+    radial-gradient(circle at 50% 33%,#2e2e2e 0 13%,transparent 13.6%),
+    radial-gradient(ellipse 40% 32% at 50% 80%,#2a2a2a 0 99%,transparent 100%);
+}
+.ph[data-art=person].missing::after{top:16px;bottom:auto}
+
+/* ===================== HERO ===================== */
+.hero{
+  position:relative;min-height:100vh;min-height:100svh;overflow:hidden;
+  padding:calc(96px + env(safe-area-inset-top)) var(--pad) 36px;
+  display:flex;flex-direction:column;
+}
+.hero-top{display:flex;justify-content:space-between;gap:20px;position:relative;z-index:3}
+.hero-stage{position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;min-height:min(62vh,640px)}
+
+/* cincin orbit yang berputar di belakang foto */
+.orbit{
+  position:absolute;left:50%;top:48%;width:min(74vw,820px);aspect-ratio:1;
+  transform:translate(-50%,-50%);pointer-events:none;z-index:0;
+}
+.ring{position:absolute;border-radius:50%;border:1px solid var(--line-2)}
+.ring.r1{inset:0;animation:rot 46s linear infinite}
+.ring.r2{inset:11%;border-style:dashed;border-color:rgba(255,255,255,.18);animation:rot 30s linear infinite reverse}
+.ring.r3{inset:24%;animation:rot 20s linear infinite}
+.ring.r4{inset:36%;border-color:rgba(255,255,255,.07);border-style:dotted;animation:rot 60s linear infinite reverse}
+.ring::before{
+  content:'';position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;
+  background:#fff;box-shadow:0 0 18px 3px rgba(255,255,255,.55);
+}
+.ring.r2::before{width:6px;height:6px;margin-left:-3px;top:-3px;background:#9a9a9a;box-shadow:0 0 12px 2px rgba(255,255,255,.25)}
+.ring.r3::before{top:auto;bottom:-4px;background:#d0d0d0}
+.ring.r4::before{display:none}
+
+.hero-photo{
+  position:absolute;left:50%;top:0;bottom:0;width:min(31vw,450px);margin-left:calc(min(31vw,450px)/-2);z-index:1;
+}
+.hp-move{position:absolute;inset:0;will-change:transform}
+.hero-photo .frame{
+  position:absolute;inset:0;
+  /* gradasi transparan di bawah foto */
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 52%,rgba(0,0,0,.55) 74%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,#000 52%,rgba(0,0,0,.55) 74%,transparent 100%);
+  transition:transform .6s var(--ease);
+}
+.hero-photo .frame img{filter:grayscale(1) contrast(1.08) brightness(.95);object-position:center top}
+.hero-photo .sheen{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.16) 50%,transparent 70%);
+  background-size:260% 100%;background-position:130% 0;animation:sheen 7s ease-in-out 2.4s infinite;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 40%,transparent 80%);mask-image:linear-gradient(to bottom,#000 0%,#000 40%,transparent 80%);
+  mix-blend-mode:overlay;
+}
+@keyframes sheen{0%,60%{background-position:130% 0}100%{background-position:-40% 0}}
+
+/* badge berputar di pojok foto */
+.badge{position:absolute;right:-16%;bottom:24%;width:136px;height:136px;z-index:3}
+.badge .spin{position:absolute;inset:0;animation:rot 15s linear infinite}
+.badge svg{width:100%;height:100%;overflow:visible}
+.badge text{font-size:10px;fill:#fff;font-family:var(--f-body);font-weight:600;letter-spacing:2.1px;text-transform:uppercase}
+.badge .core{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center}
+.badge .core svg{width:20px;height:20px;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+
+/* nama: huruf-hurufnya "bernapas" mengikuti kursor / sentuhan */
+.hero-title{
+  position:relative;z-index:2;pointer-events:none;
+  font-family:var(--f-display);font-weight:800;text-transform:uppercase;
+  font-size:clamp(3.4rem,13.4vw,14.5rem);line-height:.84;letter-spacing:-.035em;
+}
+.hero-title .ln{display:flex;overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em}
+.hero-title .ln.l2{justify-content:flex-end;-webkit-text-stroke:1.6px #fff;color:transparent}
+.hero-title .ch{
+  display:inline-block;transform:translateY(112%);
+  font-variation-settings:'wdth' 100;
+  transition:transform 1.4s var(--ease);transition-delay:calc(var(--i)*.07s + .25s);
+}
+body.loaded .hero-title .ch{transform:none}
+.hero-title .gap{width:.28em}
+
+.hero-bottom{
+  position:relative;z-index:3;display:grid;grid-template-columns:1.2fr auto 1fr;gap:32px;align-items:end;
+  margin-top:clamp(26px,4vw,50px);
+}
+.hero-bottom p{max-width:36ch;color:var(--fg-2);font-size:clamp(16px,1.25vw,19px)}
+.cue{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--mute)}
+.cue i{display:block;width:1px;height:54px;background:linear-gradient(#fff,transparent);transform-origin:top;animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:1}55%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.cta{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+
+/* ===================== MARQUEE ===================== */
+.marq{position:relative;z-index:1;padding:clamp(40px,6vw,90px) 0;transform:rotate(-2.2deg);margin:0 -3vw}
+.marquee{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);padding:clamp(10px,1.6vw,22px) 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee+.marquee{border-top:0}
+.marquee .track{display:inline-flex;will-change:transform}
+.marquee .group{display:inline-flex;align-items:center;flex:none}
+.marquee span{
+  font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 120;
+  font-size:clamp(2.6rem,8vw,8rem);line-height:1.05;letter-spacing:-.035em;text-transform:uppercase;padding:0 .12em;
+}
+.marquee.alt span{color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.55)}
+.marquee i{
+  flex:none;width:clamp(26px,4vw,56px);height:clamp(26px,4vw,56px);margin:0 clamp(14px,2.4vw,40px);
+  background:conic-gradient(from 0deg,#fff,#444,#fff,#444,#fff);
+  -webkit-mask:radial-gradient(circle,transparent 38%,#000 40%);mask:radial-gradient(circle,transparent 38%,#000 40%);
+  border-radius:50%;animation:rot 6s linear infinite;
+}
+
+/* ===================== ABOUT ===================== */
+.about-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(24px,5vw,90px)}
+.about-side{position:sticky;top:120px;align-self:start;display:grid;gap:20px;color:var(--mute);font-size:15px}
+.about-side b{display:block;color:var(--fg);font-weight:600}
+.fill{
+  font-family:var(--f-display);font-weight:600;font-variation-settings:'wdth' 90;
+  font-size:clamp(1.75rem,3.9vw,3.7rem);line-height:1.12;letter-spacing:-.025em;
+}
+.fill .w{opacity:.16;transition:opacity .5s}
+.fill .w.on{opacity:1}
+.about-p{max-width:54ch;margin-top:clamp(28px,4vw,56px);color:var(--fg-2)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(50px,7vw,110px);border-top:1px solid var(--line-2)}
+.stat{padding:28px 20px 8px 0}
+.stat+.stat{padding-left:clamp(14px,2vw,28px);border-left:1px solid var(--line)}
+.stat b{
+  display:block;font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 110;
+  font-size:clamp(2.8rem,6.4vw,6.4rem);line-height:1;letter-spacing:-.04em;
+  background:linear-gradient(180deg,#fff 20%,#4d4d4d 110%);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat span{display:block;margin-top:10px;color:var(--mute);font-size:14px}
+.stat b span{display:inline;margin:0;color:inherit;font-size:inherit}
+
+/* ===================== PROJECTS — kartu menumpuk saat scroll ===================== */
+.stack{position:relative}
+.card{position:sticky;top:calc(92px + var(--i)*28px);margin-bottom:clamp(26px,4vw,60px)}
+.card-in{
+  position:relative;display:grid;grid-template-columns:1fr auto;min-height:min(70vh,640px);
+  background:linear-gradient(160deg,#151515,#070707);border-radius:26px;overflow:hidden;transform-origin:50% 0;
+  box-shadow:0 -30px 60px -30px rgba(0,0,0,.9),0 0 0 1px var(--line);
+}
+.card-in::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;z-index:3;pointer-events:none;
+  background:conic-gradient(from var(--a),transparent 0 72%,rgba(255,255,255,.85) 86%,transparent 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+  animation:angle 7s linear infinite;opacity:.8;
+}
+@keyframes angle{to{--a:360deg}}
+.card-info{padding:clamp(24px,3.4vw,52px);display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.card-top{display:flex;justify-content:space-between;color:var(--mute);font-size:14px}
+.card h3{
+  font-family:var(--f-display);font-weight:800;font-variation-settings:'wdth' 100;
+  font-size:clamp(2rem,4.2vw,4.2rem);line-height:.96;letter-spacing:-.035em;margin-bottom:18px;
+}
+.card h3 small{display:block;font-size:.42em;font-weight:400;letter-spacing:-.01em;color:var(--mute);margin-top:12px;font-family:var(--f-body)}
+.card p{color:var(--fg-2);max-width:42ch;font-size:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.tags li{padding:6px 13px;border:1px solid var(--line-2);border-radius:999px;font-size:13px;color:var(--fg-2)}
+.card-links{display:flex;gap:10px;flex-wrap:wrap}
+.card-links .btn{padding:13px 22px;font-size:14px}
+.card-shot{
+  width:clamp(280px,30vw,460px);
+  aspect-ratio:3/4;
+  align-self:center;
+  margin:clamp(16px,2vw,28px) clamp(16px,2vw,28px) clamp(16px,2vw,28px) 0;
+  border-radius:16px;
+}
+.card:hover .card-shot img{transform:scale(1.05)}
+.card-shade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:4}
+
+/* ===================== GALERI PRESTASI ===================== */
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.2vw,32px);align-items:start}
+.g-item:nth-child(1){grid-column:1/span 7}
+.g-item:nth-child(2){grid-column:8/span 5;margin-top:11vw}
+.g-item:nth-child(3){grid-column:2/span 5;margin-top:2vw}
+.g-item:nth-child(4){grid-column:7/span 6;margin-top:9vw}
+.g-item:nth-child(5){grid-column:1/span 6;margin-top:2vw}
+.g-item:nth-child(6){grid-column:8/span 5;margin-top:7vw}
+.g-par{will-change:transform}
+.g-par[data-reveal]{transition:opacity 1.1s var(--ease);transition-delay:calc(var(--d,0)*1s)}
+.g-card{display:block;cursor:pointer;transition:transform .5s var(--ease);transform-style:preserve-3d;will-change:transform}
+.g-card .ph{aspect-ratio:var(--ar);border-radius:8px}
+.g-card .ph img{filter:grayscale(1) contrast(1.05)}
+.g-card:hover .ph img{transform:scale(1.06);filter:grayscale(0) contrast(1.05)}
+.g-cap{display:flex;justify-content:space-between;gap:20px;padding:16px 2px 0}
+.g-cap h3{font-family:var(--f-display);font-weight:700;font-variation-settings:'wdth' 90;font-size:clamp(1.1rem,1.7vw,1.6rem);line-height:1.15;letter-spacing:-.02em}
+.g-cap p{color:var(--mute);font-size:14px;margin-top:4px}
+.g-cap time{color:var(--fg-2);font-size:14px;white-space:nowrap}
+.hint{display:none;margin-top:18px;color:var(--mute);font-size:14px}
+
+/* ===================== EXPERIENCE ===================== */
+.split{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(30px,6vw,110px)}
+.sticky{position:sticky;top:120px;align-self:start}
+.sticky p{color:var(--mute);max-width:32ch;margin-top:22px}
+.tl{position:relative;padding-left:clamp(28px,4vw,60px)}
+.tl-line{position:absolute;left:0;top:6px;bottom:0;width:1px;background:var(--line-2)}
+.tl-line i{position:absolute;inset:0;background:linear-gradient(#fff,#fff 80%,rgba(255,255,255,.2));transform-origin:top;transform:scaleY(var(--p,0))}
+.tl-item{position:relative;padding-bottom:clamp(44px,6vw,88px)}
+.tl-item::before{
+  content:'';position:absolute;left:calc(clamp(28px,4vw,60px)*-1 - 5px);top:.55em;width:11px;height:11px;border-radius:50%;
+  background:#000;border:1px solid #fff;transition:background .6s,box-shadow .6s;
+}
+.tl-item.in::before{background:#fff;box-shadow:0 0 0 6px rgba(255,255,255,.1)}
+.tl-item time{font-size:14px;color:var(--mute)}
+.tl-item h3{font-family:var(--f-display);font-weight:700;font-variation-settings:'wdth' 100;font-size:clamp(1.6rem,3vw,2.8rem);line-height:1.05;letter-spacing:-.03em;margin:8px 0 12px}
+.tl-item h3 span{color:var(--mute);font-weight:400}
+.tl-item p{color:var(--fg-2);max-width:52ch}
+
+/* ===================== CONTACT + FOOTER ===================== */
+.mega{font-family:var(--f-display);font-weight:800;font-size:clamp(3rem,11vw,11.5rem);line-height:.88;letter-spacing:-.045em}
+.mega .mask>span{font-variation-settings:'wdth' 52;transition:transform 1.3s var(--ease),font-variation-settings 2s var(--ease);transition-delay:calc(var(--d,0)*1s)}
+.mega .mask.in>span{font-variation-settings:'wdth' 112}
+.mega .mask>span.out{background:none;-webkit-text-stroke:1.6px #fff}
+.contact-row{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;margin:clamp(44px,6vw,90px) 0 clamp(40px,5vw,70px)}
+.mail{
+  font-family:var(--f-display);font-weight:600;font-variation-settings:'wdth' 100;
+  font-size:clamp(1.5rem,4.2vw,4rem);letter-spacing:-.03em;line-height:1.1;
+  background:linear-gradient(#fff,#fff) 0 100%/0 2px no-repeat;transition:background-size .8s var(--ease);padding-bottom:6px;word-break:break-all;
+}
+.mail:hover{background-size:100% 2px}
+.orb-btn{
+  width:clamp(130px,13vw,184px);aspect-ratio:1;border-radius:50%;background:#fff;color:#000;
+  display:grid;place-items:center;font-weight:700;font-size:17px;text-align:center;position:relative;flex:none;
+  transition:transform .5s var(--ease);
+}
+.orb-btn::before{content:'';position:absolute;inset:-14px;border-radius:50%;border:1px dashed rgba(255,255,255,.4);animation:rot 18s linear infinite}
+.orb-btn span{display:flex;align-items:center;gap:8px}
+.socials{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-2)}
+.socials a{
+  display:flex;justify-content:space-between;align-items:center;padding:26px 20px 26px 0;font-weight:500;font-size:17px;
+  position:relative;transition:color .4s,padding .6s var(--ease);
+}
+.socials li+li a{padding-left:clamp(14px,2vw,28px);border-left:1px solid var(--line)}
+.socials a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
+.socials a:hover::after{transform:none}
+.socials .ico{opacity:.5;transition:opacity .3s,transform .5s var(--ease)}
+.socials a:hover .ico{opacity:1;transform:translate(3px,-3px)}
+footer{padding:0 0 calc(34px + env(safe-area-inset-bottom))}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;margin-top:clamp(50px,7vw,100px);border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+
+/* ===================== LIGHTBOX ===================== */
+#lightbox{
+  position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:24px;
+  background:rgba(0,0,0,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s linear .5s;
+}
+body.lb-open #lightbox{opacity:1;visibility:visible;transition:opacity .5s,visibility 0s}
+.lb-inner{transform:scale(.92) translateY(20px);transition:transform .8s var(--ease);max-width:100%}
+body.lb-open .lb-inner{transform:none}
+.lb-inner .ph{width:min(88vw,calc(74vh*297/210));aspect-ratio:var(--ar);border-radius:10px}
+.lb-inner .ph img{object-fit:contain;filter:none}
+.lb-cap{margin-top:16px;display:flex;justify-content:space-between;gap:20px;color:var(--fg-2);font-size:15px}
+.lb-cap h3{font-family:var(--f-display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.02em;color:#fff}
+.lb-cap p{color:var(--mute);font-size:14px;margin-top:4px}
+.lb-close{position:absolute;top:calc(20px + env(safe-area-inset-top));right:20px;width:48px;height:48px;border:1px solid var(--line-2);border-radius:50%;font-size:22px;line-height:1}
+
+/* ===================== RESPONSIVE: tablet & mobile ===================== */
+@media (max-width:1100px){
+  .rail{display:none}
+}
+@media (max-width:960px){
+  .nav,.pill{display:none}
+  .burger{display:block}
+  .hero-bottom{grid-template-columns:1fr 1fr}
+  .cue{display:none}
+  .cta{justify-content:flex-start;grid-column:1/-1}
+  .hero-photo{width:min(46vw,420px);margin-left:calc(min(46vw,420px)/-2)}
+  .badge{right:-22%;width:110px;height:110px}
+}
+@media (max-width:820px){
+  body{font-size:16px}
+  .sec-head{grid-template-columns:1fr;gap:14px}
+  .about-grid,.split{grid-template-columns:1fr}
+  .about-side,.sticky{position:static}
+  .about-side{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line);margin-top:16px}
+
+  /* kartu proyek: tidak menumpuk di layar kecil */
+  .card{position:relative;top:auto}
+  .card-in{grid-template-columns:1fr;min-height:0}
+  .card-shot{width:auto;aspect-ratio:3/4;order:-1;margin:14px 14px 0;max-height:70vh}
+  .card-shot:not(.missing)::after{background:linear-gradient(0deg,#0b0b0b 0%,transparent 30%)}
+  .card-info{gap:24px}
+
+  /* galeri jadi carousel geser samping */
+  .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gallery::-webkit-scrollbar{display:none}
+  .g-item{flex:0 0 78%;scroll-snap-align:center;margin-top:0!important}
+  .hint{display:block}
+
+  .socials{grid-template-columns:1fr 1fr}
+  .socials li:nth-child(3) a{border-left:0;padding-left:0}
+  .socials li:nth-child(n+3){border-top:1px solid var(--line)}
+  .contact-row{flex-direction:column-reverse;align-items:flex-start}
+  .toTop{width:62px;height:62px}
+  .toTop text{font-size:9.6px}
+  .orb{filter:blur(34px)}
+  .marq{transform:rotate(-3deg)}
+}
+@media (max-width:640px){
+  /* mobile hero: foto di atas, nama menimpa gradasi foto */
+  .hero{padding-top:calc(88px + env(safe-area-inset-top))}
+  .hero-stage{min-height:0;justify-content:flex-start}
+  .orbit{top:30%;width:130vw}
+  .hero-photo{position:relative;left:auto;top:auto;bottom:auto;margin:0 auto -12vw;width:min(72vw,330px);aspect-ratio:4/5;z-index:1}
+  .hero-photo .badge{right:-18%;bottom:20%;width:96px;height:96px}
+  .badge .core{width:40px;height:40px;margin:-20px 0 0 -20px}
+  .hero-title{font-size:clamp(3.2rem,21vw,7.5rem)}
+  .hero-title .ln.l2{justify-content:flex-start}
+  .hero-bottom{grid-template-columns:1fr;gap:22px}
+  .cta .btn{flex:1;justify-content:center}
+  .hero-top .small:last-child{display:none}
+  .g-item{flex-basis:84%}
+  .stat b{font-size:clamp(2.6rem,14vw,4rem)}
+  .tl{padding-left:28px}
+  .tl-item::before{left:-33px}
+  .foot{flex-direction:column;gap:8px}
+}
+@media (hover:none){
+  .btn:hover{color:inherit;border-color:var(--line-2)}
+  .btn:hover::before{transform:translateY(102%)}
+  .btn.solid:hover{color:#000}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+}
+/* FIX HEADING MY JOURNEY */
+#experience .sticky .h2 {
+    font-size: clamp(2.5rem, 5vw, 4.8rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+}
+
+#experience .sticky .h2 .mask {
+    width: 100%;
+    max-width: 100%;
+}
+
+#experience .sticky .h2 .mask span {
+    white-space: nowrap;
+}
+/* SCHOOL NAME - KEEP IN ONE LINE */
+.school-name {
+    white-space: nowrap;
+    display: inline-block;
+}
+</style>
+</head>
+
+<body class="loading">
+
+<!-- Preloader -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-top"><span>Biann, Portfolio</span><span>2026</span></div>
+  <div class="pre-word" id="preWord">Design</div>
+  <div class="pre-num" id="preNum">000</div>
+  <div class="pre-bar"><i id="preBar"></i></div>
+</div>
+
+<!-- Kursor kustom (desktop) -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"><b id="cursorLabel"></b></div>
+
+<!-- Background -->
+<div class="bg-grid" id="bgGrid"></div>
+<div class="bg-glow" id="bgGlow"></div>
+<div class="bg-vig"></div>
+<div class="orb o1" id="orb1"></div>
+<div class="orb o2" id="orb2"></div>
+<div class="grain"></div>
+
+<!-- Header -->
+<header class="hdr" id="hdr">
+  <a href="#home" class="logo" aria-label="Home">ARH<sup>®</sup></a>
+  <nav class="nav" aria-label="Main">
+    <a href="#about" class="roll" data-hover><span data-t="About">About</span></a>
+    <a href="#work" class="roll" data-hover><span data-t="Work">Work</span></a>
+    <a href="#awards" class="roll" data-hover><span data-t="Awards">Awards</span></a>
+    <a href="#experience" class="roll" data-hover><span data-t="Experience">Experience</span></a>
+    <a href="#contact" class="roll" data-hover><span data-t="Contact">Contact</span></a>
+  </nav>
+  <div class="hdr-r">
+    <span class="pill"><i></i>Open for projects</span>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="menu" id="menu">
+  <ul>
+    <li><a href="#about" style="--i:0">About</a></li>
+    <li><a href="#work" style="--i:1">Work</a></li>
+    <li><a href="#awards" style="--i:2">Awards</a></li>
+    <li><a href="#experience" style="--i:3">Experience</a></li>
+    <li><a href="#contact" style="--i:4">Contact</a></li>
+  </ul>
+  <div class="menu-foot">
+    <a href="mailto:albianr16@gmail.com">albianr16@gmail.com</a>
+    <span><a href="https://github.com/byaniyahgapapakok" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://www.tiktok.com/bianakunketiga" target="_blank" rel="noopener noreferrer">Tiktok</a>, <a href="https://www.instagram.com/byaniyahgapapa" target="_blank" rel="noopener noreferrer">Instagram</a></span>
+  </div>
+</div>
+
+<!-- Penanda section (desktop) -->
+<nav class="rail" id="rail" aria-label="Sections">
+  <a href="#home" data-hover><span>Intro</span><i></i></a>
+  <a href="#about" data-hover><span>About</span><i></i></a>
+  <a href="#work" data-hover><span>Work</span><i></i></a>
+  <a href="#awards" data-hover><span>Awards</span><i></i></a>
+  <a href="#experience" data-hover><span>Experience</span><i></i></a>
+  <a href="#contact" data-hover><span>Contact</span><i></i></a>
+</nav>
+
+<!-- Tombol ikut-scroll: progres + kembali ke atas -->
+<a href="#home" class="toTop" id="toTop" aria-label="Back to top" data-hover>
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <circle class="ring-bg" cx="50" cy="50" r="46"/>
+    <circle class="ring-p" id="ringP" cx="50" cy="50" r="46"/>
+    <g class="txt">
+      <defs><path id="tt" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0"/></defs>
+      <text><textPath href="#tt" textLength="210" lengthAdjust="spacing">BACK TO TOP — BACK TO TOP — </textPath></text>
+    </g>
+  </svg>
+  <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+</a>
+
+<main>
+
+<!-- =============================== HERO =============================== -->
+<section class="hero" id="home" data-sec>
+  <div class="hero-top">
+    <span class="small">Portfolio 2026</span>
+    <span class="small">Based in Indonesia, <span class="clock">--:--:--</span></span>
+  </div>
+
+  <div class="hero-stage">
+    <div class="orbit" aria-hidden="true">
+      <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div>
+    </div>
+
+    <!-- FOTO KAMU: taruh file di assets/foto-saya.jpg -->
+    <div class="hero-photo" data-reveal="clip" style="--d:.5">
+      <div class="hp-move" data-parallax="-0.08">
+        <div class="frame ph" data-label="Taruh fotomu di assets/foto-saya.jpg" data-art="person" data-tilt>
+          <img data-img src="gwa.png" alt="Portrait of Albian Rizky" decoding="async">
+          <span class="sheen"></span>
+        </div>
+        <div class="badge" aria-hidden="true">
+          <div class="spin">
+            <svg viewBox="0 0 136 136">
+              <defs><path id="bp" d="M68,68 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs>
+              <text><textPath href="#bp" textLength="322" lengthAdjust="spacing">Available for freelance work — Say hello — </textPath></text>
+            </svg>
+          </div>
+          <div class="core"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3.5 8.5L8 13l4.5-4.5"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GANTI nama di data-line. Nama pendek = tampilan paling bagus. -->
+    <h1 class="hero-title" id="heroTitle" aria-label="Albian Rizky H">
+      <span class="ln l1" data-line="Albian" aria-hidden="true"></span>
+      <span class="ln l2" data-line="Rizky H" aria-hidden="true"></span>
+    </h1>
+  </div>
+
+  <div class="hero-bottom">
+    <p data-reveal style="--d:.9">Ambitious student exploring knowledge, pursuing achievements, and continuously growing through new challenges.</p>
+    <div class="cue" data-reveal style="--d:1"><i></i>Scroll</div>
+    <div class="cta" data-reveal style="--d:1.1">
+      <a href="#work" class="btn solid" data-hover>See my work</a>
+      <a href="#contact" class="btn" data-hover>Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== MARQUEE ============================== -->
+<section class="marq" aria-label="Tech stack">
+  <div class="marquee" data-dir="left" data-speed="0.7">
+    <div class="track"><div class="group">
+      <span>JavaScript</span><i></i><span>TypeScript</span><i></i><span>React</span><i></i><span>Next.js</span><i></i><span>Node.js</span><i></i><span>Python</span><i></i>
+    </div></div>
+  </div>
+  <div class="marquee alt" data-dir="right" data-speed="0.7">
+    <div class="track"><div class="group">
+      <span>PostgreSQL</span><i></i><span>Docker</span><i></i><span>Three.js</span><i></i><span>Tailwind</span><i></i><span>Figma</span><i></i><span>Git</span><i></i>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============================== ABOUT ============================== -->
+<section class="sec" id="about" data-sec>
+  <div class="wrap">
+    <header class="sec-head" data-reveal="line">
+      <h2 class="h2"><span class="mask"><span>About me</span></span></h2>
+      <p class="sec-note" data-reveal style="--d:.3">A short version of who I am and how I work.</p>
+    </header>
+
+    <div class="about-grid">
+      <div class="about-side" data-reveal>
+        <div><b>Location</b>Bogor, Indonesia</div>
+        <div><b>Focus</b>School, Sports, Study</div>
+      </div>
+      <div>
+        <p class="fill" id="fillText">I am currently a 9th-grade student at SMP IT Al-Yasmin, where I continue to broaden my horizons, explore new opportunities, and challenge myself to keep growing. I have a strong interest in academics, leadership, and creativity, and I believe that every experience is a valuable part of my life's journey.</p>
+        <p class="about-p" data-reveal>Beyond the classroom, I actively participate in academic competitions, organizational activities, and creative projects. Each experience inspires me to learn more, build new skills, and make a positive impact.</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat" data-reveal style="--d:0"><b><span data-count="65" data-suffix="+">0</span></b><span>Completed Assignments</span></div>
+      <div class="stat" data-reveal style="--d:.1"><b><span data-count="2" data-suffix="+">0</span></b><span>Organizational Experiences</span></div>
+      <div class="stat" data-reveal style="--d:.2"><b><span data-count="2" data-suffix="+">0</span></b><span>Awards & Recognition</span></div>
+      <div class="stat" data-reveal style="--d:.3"><b><span data-count="4" data-suffix="+">0</span></b><span>Academic Achievements</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== WORK ============================== -->
+<section class="sec" id="work" data-sec>
+  <div class="wrap">
+    <header class="sec-head" data-reveal="line">
+      <h2 class="h2"><span class="mask"><span>Creative Works</span></span></h2>
+      <p class="sec-note" data-reveal style="--d:.3">A collection of creative works, visual designs, and digital projects crafted with imagination, curiosity, and attention to detail.</p>
+    </header>
+
+    <div class="stack" id="stack">
+
+      <!-- PROYEK 1: screenshot di assets/project-1.jpg (ganti teks, link, dan tag sesuai proyekmu) -->
+      <article class="card" style="--i:0">
+        <div class="card-in" data-cursor="Open">
+          <div class="card-info">
+            <div class="card-top"><span>Social Media Design</span><span>2025</span></div>
+            <div>
+              <h3>G30S/PKI Commemoration<small>Commemoration Visual Design</small></h3>
+              <p>A thematic poster design created to commemorate the historical events of G30S/PKI, featuring powerful silhouettes, symbolic elements, and structured composition for educational media.</p>
+              <ul class="tags"><li>Photoshop</li><li>Illustrator</li><li>Canva</li><li>Graphic Design</li></ul>
+            </div>
+            <div class="card-links">
+              <a href="#" class="btn solid" data-hover>Live site <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+              <a href="#" class="btn" data-hover>Source code</a>
+            </div>
+          </div>
+          <div class="card-shot ph" data-label="Screenshot proyek: assets/project-1.jpg" data-art="rings"><img data-img src="posterg30spki.png" alt="Northwind dashboard screenshot" decoding="async"></div>
+          <span class="card-shade"></span>
+        </div>
+      </article>
+
+      <article class="card" style="--i:1">
+        <div class="card-in" data-cursor="Open">
+          <div class="card-info">
+            <div class="card-top"><span>Cultural Design</span><span>2025</span></div>
+            <div>
+              <h3>Batik Nasional<small>National Batik Day Campaign</small></h3>
+              <p>A cultural heritage poster design created to celebrate National Batik Day, featuring traditional Javanese wayang-inspired illustrations and rich ethnic patterns to honor Indonesian heritage.</p>
+              <ul class="tags"><li>Canva</li><li>Illustrator</li><li>Visual Identity</li></ul>
+            </div>
+            <div class="card-links">
+              <a href="#" class="btn solid" data-hover>Live site <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+              <a href="#" class="btn" data-hover>Source code</a>
+            </div>
+          </div>
+          <div class="card-shot ph" data-label="Screenshot proyek: assets/project-2.jpg" data-art="lines"><img data-img src="posterharibatik.png" alt="Kopi Kita screenshot" decoding="async"></div>
+          <span class="card-shade"></span>
+        </div>
+      </article>
+
+      <article class="card" style="--i:2">
+        <div class="card-in" data-cursor="Open">
+          <div class="card-info">
+            <div class="card-top"><span>National Campaign</span><span>2025</span></div>
+            <div>
+              <h3>Hari Pahlawan<small>Heroes' Day Commemoration</small></h3>
+              <p>A patriotic vector and digital illustration poster created to honor Heroes' Day, featuring national symbols and brave figures to commemorate the spirit of Indonesian independence fighters.</p>
+              <ul class="tags"><li>Photoshop</li><li>Vector Art</li><li>Digital Illustration</li></ul>
+            </div>
+            <div class="card-links">
+              <a href="#" class="btn solid" data-hover>Live site <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+              <a href="#" class="btn" data-hover>Source code</a>
+            </div>
+          </div>
+          <div class="card-shot ph" data-label="Screenshot proyek: assets/project-3.jpg" data-art="conic"><img data-img src="posterharipahlawan.png" alt="Lumen screenshot" decoding="async"></div>
+          <span class="card-shade"></span>
+        </div>
+      </article>
+
+      <article class="card" style="--i:3">
+        <div class="card-in" data-cursor="Open">
+          <div class="card-info">
+            <div class="card-top"><span>School Event</span><span>2026</span></div>
+            <div>
+              <h3>Muhaddoroh<small>Cultural & Islamic Event Poster</small></h3>
+              <p>An event poster design created for Muhaddoroh 8 Pintar, blending traditional shadow puppet (wayang) aesthetics with elegant typography to promote a school religious and public speaking event.</p>
+              <ul class="tags"><li>Photoshop</li><li>Poster Design</li><li>Event Branding</li></ul>
+            </div>
+            <div class="card-links">
+              <a href="#" class="btn solid" data-hover>View app <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+              <a href="#" class="btn" data-hover>Source code</a>
+            </div>
+          </div>
+          <div class="card-shot ph" data-label="Screenshot proyek: assets/project-4.jpg" data-art="dots"><img data-img src="postermuhadharahpt3.png" alt="Pulse screenshot" decoding="async"></div>
+          <span class="card-shade"></span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AWARDS ============================== -->
+<section class="sec" id="awards" data-sec>
+  <div class="wrap">
+    <header class="sec-head" data-reveal="line">
+      <h2 class="h2"><span class="mask"><span>Achievements</span></span></h2>
+      <p class="sec-note" data-reveal style="--d:.3">Competitions, recognitions, and the moments I'm proudest of. Tap any photo to enlarge it.</p>
+    </header>
+
+    <!-- PRESTASI (A4 landscape, 29,7 x 21 cm): taruh gambar di assets/prestasi-1.jpg sampai prestasi-6.jpg -->
+    <div class="gallery" id="gallery">
+
+      <div class="g-item" style="--ar:297/210"><div class="g-par" data-parallax="0.05" data-reveal>
+        <article class="g-card" role="button" tabindex="0" data-tilt data-cursor="View" aria-label="Open achievement photo">
+          <div class="ph" data-label="assets/prestasi-1.jpg (A4 landscape)" data-art="rings"><img data-img src="simfoni.png" alt="First place, National Software Competition" decoding="async"></div>
+          <div class="g-cap"><div><h3>Gold Medalist, National Social Studies Olympiad</h3><p>SIMFONI · GYPEM - IYFEST</p></div><time>2026</time></div> 
+        </article>
+      </div></div>
+
+      <div class="g-item" style="--ar:297/210"><div class="g-par" data-parallax="0.1" data-reveal style="--d:.1">
+        <article class="g-card" role="button" tabindex="0" data-tilt data-cursor="View" aria-label="Open achievement photo">
+          <div class="ph" data-label="osara.png (A4 landscape)" data-art="lines"><img data-img src="osara.png" alt="Finalist, International Hackathon" decoding="async"></div>
+          <div class="g-cap"><div><h3>Bronze Medalist, National Social Studies Olympiad</h3><p>OSARA · Puspresindo</p></div><time>2026</time></div>
+        </article>
+      </div></div>
+
+      <div class="g-item" style="--ar:297/210"><div class="g-par" data-parallax="0.04" data-reveal style="--d:.2">
+        <article class="g-card" role="button" tabindex="0" data-tilt data-cursor="View" aria-label="Open achievement photo">
+          <div class="ph" data-label="arjuna.png (A4 landscape)" data-art="dots"><img data-img src="arjuna.png" alt="Best Project, University Showcase" decoding="async"></div>
+          <div class="g-cap"><div><h3>Finalist, National Mathematics Olympiad</h3><p>ARJUNA · Puspresindo</p></div><time>2026</time></div>
+        </article>
+      </div></div>
+
+      <div class="g-item" style="--ar:297/210"><div class="g-par" data-parallax="0.08" data-reveal>
+        <article class="g-card" role="button" tabindex="0" data-tilt data-cursor="View" aria-label="Open achievement photo">
+          <div class="ph" data-label="osisterbaik.png (A4 landscape)" data-art="conic"><img data-img src="osisterbaik.png" alt="Scholarship awardee" decoding="async"></div>
+          <div class="g-cap"><div><h3>The Best Student Council (OSIS) Division 5 Committee Members</h3><p>OSIS Bergerak Kerja Nyata</p></div><time>2025</time></div>
+        </article>
+      </div></div>
+
+      <div class="g-item" style="--ar:297/210"><div class="g-par" data-parallax="0.03" data-reveal style="--d:.1">
+        <article class="g-card" role="button" tabindex="0" data-tilt data-cursor="View" aria-label="Open achievement photo">
+          <div class="ph" data-label="" data-art="rings"><img data-img src="assets/prestasi-5.jpg" alt="Cloud certification" decoding="async"></div>
+          <div class="g-cap"><div><h3>Insyaallah QUANTUM Informatics Olympiad</h3><p>On Going Bismillah</p></div><time>2026</time></div>
+        </article>
+      </div></div>
+
+      <div class="g-item" style="--ar:297/210"><div class="g-par" data-parallax="0.09" data-reveal style="--d:.2">
+        <article class="g-card" role="button" tabindex="0" data-tilt data-cursor="View" aria-label="Open achievement photo">
+          <div class="ph" data-label="" data-art="lines"><img data-img src="assets/prestasi-6.jpg" alt="Speaker at a tech meetup" decoding="async"></div>
+          <div class="g-cap"><div><h3>Insyaallah ROBOTERA Artificial Intelligence</h3><p>On Going Bismillah</p></div><time>2026</time></div>
+        </article>
+      </div></div>
+
+    </div>
+    <p class="hint">Swipe sideways to see more.</p>
+  </div>
+</section>
+
+<!-- ============================== EXPERIENCE ============================== -->
+<section class="sec" id="experience" data-sec>
+  <div class="wrap">
+    <div class="split">
+      <div class="sticky">
+        <h2 class="h2"><span class="mask"><span>My</span></span><span class="mask" style="--d:.1"><span>Journey</span></span></h2>
+        <p data-reveal style="--d:.3">A timeline of my growth, leadership experiences, organizational contributions, and academic pursuits throughout junior high school.</p>
+      </div>
+
+      <div class="tl" id="tl">
+        <div class="tl-line"><i></i></div>
+
+        <div class="tl-item" data-reveal>
+          <time>GRADE 7</time>
+          <h3>Student Council Member <span>OSIS Bergerak Kerja Nyata</span></h3>
+          <p>Served as a member of Sekbid 5 (National Defense), contributing to student council activities while developing teamwork, responsibility, and organizational skills.</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <time>GRADE 8</time>
+          <h3>Treasurer I <span>OSIS Taruna Berinovasi</span></h3>
+          <p>Took on the responsibility of Treasurer I, strengthening financial management, accountability, coordination, and leadership skills within the student council.</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <time>GRADE 9 — PRESENT</time>
+          <h3>Academic Competitor <span>Academic & Technology Exploration</span></h3>
+          <p>Actively exploring academic competitions in Social Studies (IPS) and Informatics, while developing an interest in Artificial Intelligence (AI) and emerging technologies.</p>
+        </div>
+        <div class="tl-item" data-reveal>
+          <time>GRADE 7 — PRESENT</time>
+          <h3>Creative & Digital Projects <span>Personal Development</span></h3>
+          <p>Exploring creativity through digital projects, website development, visual design, and various school assignments. Continuously learning new tools and transforming ideas into meaningful creations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<section class="sec" id="contact" data-sec style="padding-bottom:clamp(40px,6vw,80px)">
+  <div class="wrap">
+    <h2 class="mega">
+      <span class="mask"><span>Let's build</span></span>
+      <span class="mask" style="--d:.1"><span>something</span></span>
+      <span class="mask" style="--d:.2"><span class="out">worth sharing.</span></span>
+    </h2>
+
+    <div class="contact-row">
+      <a class="mail" href="mailto:albianr16@gmail.com" target="_blank" rel="noopener noreferrer" data-hover data-reveal>albianr16@gmail.com</a>
+      <a class="orb-btn" href="mailto:albianr16@gmail.com" target="_blank" rel="noopener noreferrer" data-magnetic data-hover aria-label="Send an email">
+        <span>Say hi <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+    </div>
+
+    <ul class="socials" data-reveal>
+      <li><a href="https://github.com/byaniyahgapapakok" target="_blank" rel="noopener noreferrer" data-hover>GitHub <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a></li>
+      <li><a href="https://www.tiktok.com/@bianakunketiga" target="_blank" rel="noopener noreferrer" data-hover>Tiktok <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a></li>
+      <li><a href="https://www.instagram.com/byaniyahgapapa" target="_blank" rel="noopener noreferrer" data-hover>Instagram <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a></li>
+      <li><a href="https://wa.me/6285779471161" target="_blank" rel="noopener noreferrer" data-hover>Whatsapp <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L12 4M5 4h7v7"/></svg></a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span>© <span id="year">2026</span> Byann. All rights reserved.</span>
+      <span>Local time in Bogor: <span class="clock">--:--:--</span></span>
+      <span>Capek Banget Gw Ngerjain Ini Project.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox prestasi -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Achievement photo">
+  <button class="lb-close" id="lbClose" aria-label="Close" data-hover>&times;</button>
+  <div class="lb-inner" id="lbInner"></div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- helpers ---------- */
+  const $  = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const lerp  = (a, b, t) => a + (b - a) * t;
+  const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine   = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const desktopMQ = matchMedia('(min-width: 821px)');
+  const body = document.body;
+
+  let vw = innerWidth, vh = innerHeight;
+  let mx = vw / 2, my = vh / 2;
+  let hasPointer = false;
+  addEventListener('resize', () => { vw = innerWidth; vh = innerHeight; measure(); }, { passive: true });
+
+  /* ---------- gambar yang belum ada -> tampilkan placeholder ---------- */
+  $$('img[data-img]').forEach(img => {
+    const host = img.closest('.ph');
+    const mark = () => { host && host.classList.add('missing'); };
+    img.addEventListener('error', mark);
+    if (img.complete && img.naturalWidth === 0) mark();
+  });
+
+  /* ---------- nama hero: pecah jadi huruf ---------- */
+  const letters = [];
+  $$('.hero-title .ln').forEach((ln, li) => {
+    const txt = ln.dataset.line || '';
+    ln.textContent = '';
+    [...txt].forEach((c, i) => {
+      const s = document.createElement('span');
+      if (c === ' ') { s.className = 'gap'; }
+      else {
+        s.className = 'ch';
+        s.textContent = c;
+        s.style.setProperty('--i', i + li * 2);
+        letters.push({ el: s, w: 100, cx: 0, i: i + li * 4 });
+      }
+      ln.appendChild(s);
+    });
+  });
+
+  /* ---------- preloader ---------- */
+  const pre = $('#preloader'), preNum = $('#preNum'), preBar = $('#preBar'), preWord = $('#preWord');
+  const words = ['Design', 'Develop', 'Deliver'];
+  let revealStarted = false;
+
+  function finishLoading() {
+    body.classList.remove('loading');
+    body.classList.add('loaded');
+    pre.classList.add('done');
+    setTimeout(() => pre.remove(), 1600);
+    startReveal();
+  }
+  if (reduce) { finishLoading(); }
+  else {
+    const t0 = performance.now(), dur = 2000;
+    const tick = now => {
+      const t = clamp((now - t0) / dur, 0, 1);
+      const e = 1 - Math.pow(1 - t, 3);
+      const n = Math.round(e * 100);
+      preNum.textContent = String(n).padStart(3, '0');
+      preBar.style.width = n + '%';
+      preWord.textContent = words[n < 34 ? 0 : n < 68 ? 1 : 2];
+      if (t < 1) requestAnimationFrame(tick); else setTimeout(finishLoading, 320);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- reveal saat masuk layar ---------- */
+  const countUp = el => {
+    const end = +el.dataset.count, suf = el.dataset.suffix || '';
+    if (reduce) { el.textContent = end + suf; return; }
+    const t0 = performance.now(), dur = 1800;
+    const step = now => {
+      const t = clamp((now - t0) / dur, 0, 1);
+      el.textContent = Math.round((1 - Math.pow(1 - t, 4)) * end) + (t === 1 ? suf : '');
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      $$('[data-count]', e.target).forEach(countUp);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+  function startReveal() {
+    if (revealStarted) return;
+    revealStarted = true;
+    $$('[data-reveal], .mask').forEach(el => io.observe(el));
+  }
+
+  /* ---------- menu mobile ---------- */
+  const burger = $('#burger');
+  const setMenu = open => {
+    body.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+  };
+  burger.addEventListener('click', () => setMenu(!body.classList.contains('menu-open')));
+  $$('.menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  /* ---------- kursor kustom ---------- */
+  const dot = $('.cursor-dot'), ring = $('.cursor-ring'), curLabel = $('#cursorLabel');
+  let rx = mx, ry = my;
+  if (fine) {
+    body.classList.add('has-cursor');
+    document.addEventListener('pointerover', e => {
+      const h = e.target.closest('a,button,[data-hover]');
+      const c = e.target.closest('[data-cursor]');
+      ring.classList.toggle('hover', !!h);
+      if (!h && c) { ring.classList.add('view'); curLabel.textContent = c.dataset.cursor; }
+      else ring.classList.remove('view');
+    });
+    document.documentElement.addEventListener('mouseleave', () => { ring.style.opacity = 0; dot.style.opacity = 0; });
+    document.documentElement.addEventListener('mouseenter', () => { ring.style.opacity = 1; dot.style.opacity = 1; });
+  }
+  addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; hasPointer = true; }, { passive: true });
+
+  /* ---------- tilt & magnetic ---------- */
+  if (fine) {
+    $$('[data-tilt]').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        el.style.transform = `perspective(900px) rotateX(${(-y * 7).toFixed(2)}deg) rotateY(${(x * 9).toFixed(2)}deg)`;
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+    $$('[data-magnetic]').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width / 2), y = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${x * .28}px, ${y * .28}px)`;
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  /* ---------- teks "mengisi" kata demi kata ---------- */
+  const fillEl = $('#fillText');
+  const fillWords = [];
+  if (fillEl) {
+    const txt = fillEl.textContent.trim();
+    fillEl.textContent = '';
+    txt.split(/\s+/).forEach((w, i, arr) => {
+      const s = document.createElement('span');
+      s.className = 'w'; s.textContent = w;
+      fillEl.appendChild(s);
+      if (i < arr.length - 1) fillEl.appendChild(document.createTextNode(' '));
+      fillWords.push(s);
+    });
+  }
+  let litCount = -1;
+  function updateFill() {
+    if (!fillEl) return;
+    const r = fillEl.getBoundingClientRect();
+    const p = clamp((vh * .82 - r.top) / (r.height + vh * .12), 0, 1);
+    const n = reduce ? fillWords.length : Math.round(p * fillWords.length);
+    if (n === litCount) return;
+    litCount = n;
+    fillWords.forEach((w, i) => w.classList.toggle('on', i < n));
+  }
+
+  /* ---------- marquee (kecepatan ikut kecepatan scroll) ---------- */
+  const marquees = $$('.marquee').map(m => {
+    const track = $('.track', m), group = $('.group', m);
+    for (let i = 0; i < 3; i++) track.appendChild(group.cloneNode(true));
+    return { m, track, dir: m.dataset.dir === 'right' ? 1 : -1, base: +m.dataset.speed || .6, x: 0, w: 0, group };
+  });
+
+  /* ---------- section aktif ---------- */
+  const secIds = $$('[data-sec]');
+  const navLinks = $$('.nav a, .rail a');
+  const secIO = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = '#' + e.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  secIds.forEach(s => secIO.observe(s));
+
+  /* ---------- elemen untuk loop animasi ---------- */
+  const hdr = $('#hdr'), toTop = $('#toTop'), ringP = $('#ringP');
+  const bgGrid = $('#bgGrid'), bgGlow = $('#bgGlow'), orb1 = $('#orb1'), orb2 = $('#orb2');
+  const parallax = $$('[data-parallax]');
+  const cards = $$('.card');
+  const tl = $('#tl'), tlLine = tl && $('.tl-line', tl);
+  let docH = document.documentElement.scrollHeight;
+  let lastY = scrollY, vel = 0, frameN = 0;
+  let ox = vw / 2, oy = vh / 2;
+  let stickTops = [];
+
+  function measure() {
+    docH = document.documentElement.scrollHeight;
+    stickTops = cards.map(c => parseFloat(getComputedStyle(c).top) || 0);
+    marquees.forEach(o => { o.w = o.group.offsetWidth; });
+  }
+  addEventListener('load', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
+
+  /* ---------- jam ---------- */
+  const clocks = $$('.clock');
+  const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Jakarta' });
+  const tickClock = () => { const t = fmt.format(new Date()) + ' WIB'; clocks.forEach(c => c.textContent = t); };
+  tickClock(); setInterval(tickClock, 1000);
+  const yr = $('#year'); if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---------- loop utama ---------- */
+  function frame(now) {
+    const y = scrollY;
+    const dy = y - lastY;
+    lastY = y;
+    vel = lerp(vel, dy, .12);
+    if (++frameN % 40 === 0) docH = document.documentElement.scrollHeight;
+
+    /* header: sembunyi saat scroll turun, muncul saat naik */
+    hdr.classList.toggle('scrolled', y > 30);
+    if (!body.classList.contains('menu-open')) {
+      if (dy > 3 && y > 320) hdr.classList.add('hide');
+      else if (dy < -3 || y < 120) hdr.classList.remove('hide');
+    }
+
+    /* progres scroll + tombol ikut-scroll */
+    const max = Math.max(1, docH - vh);
+    const p = clamp(y / max, 0, 1);
+    ringP.style.strokeDashoffset = (289 * (1 - p)).toFixed(1);
+    toTop.classList.toggle('show', y > vh * .6);
+
+    /* background: grid bergeser pelan, glow & orb mengikuti kursor */
+    bgGrid.style.backgroundPosition = `0 ${(-y * .22).toFixed(1)}px`;
+    bgGlow.style.backgroundPosition = `0 ${(-y * .22).toFixed(1)}px`;
+    bgGlow.style.setProperty('--mx', mx + 'px');
+    bgGlow.style.setProperty('--my', my + 'px');
+    ox = lerp(ox, mx, .045); oy = lerp(oy, my, .045);
+    orb1.style.transform = `translate3d(${ox.toFixed(1)}px,${oy.toFixed(1)}px,0)`;
+    orb2.style.transform = `translate3d(${(vw * .8 - ox * .35).toFixed(1)}px,${(vh * .5 + Math.sin(y / 650) * vh * .32).toFixed(1)}px,0)`;
+
+    /* kursor */
+    if (fine) {
+      rx = lerp(rx, mx, .16); ry = lerp(ry, my, .16);
+      dot.style.transform = `translate3d(${mx}px,${my}px,0)`;
+      ring.style.transform = `translate3d(${rx.toFixed(1)}px,${ry.toFixed(1)}px,0)`;
+    }
+
+    /* parallax */
+    if (!reduce && desktopMQ.matches) {
+      for (const el of parallax) {
+        const host = el.parentElement.getBoundingClientRect();
+        if (host.bottom < -300 || host.top > vh + 300) continue;
+        const off = (host.top + host.height / 2 - vh / 2) * +el.dataset.parallax;
+        el.style.transform = `translate3d(0,${off.toFixed(1)}px,0)`;
+      }
+    }
+
+    /* nama hero: lebar huruf bergelombang, bereaksi pada kursor/sentuhan */
+    if (!reduce && y < vh * 1.3 && letters.length) {
+      for (const L of letters) L.cx = L.el.getBoundingClientRect().left + L.el.offsetWidth / 2;
+      const spread = Math.max(vw * .16, 140);
+      for (const L of letters) {
+        const idle = .5 + .5 * Math.sin(now * .0014 + L.i * .85);
+        let infl = 0;
+        if (hasPointer) {
+          const d = (L.cx - mx) / spread;
+          infl = Math.exp(-d * d);
+        }
+        const target = 62 + 88 * clamp(idle * .38 + infl, 0, 1);
+        L.w = lerp(L.w, target, .1);
+        L.el.style.fontVariationSettings = `'wdth' ${L.w.toFixed(1)}`;
+      }
+    }
+
+    /* teks mengisi */
+    updateFill();
+
+    /* marquee: scroll turun = makin cepat, scroll naik = berbalik arah */
+    if (!reduce) {
+      for (const o of marquees) {
+        if (!o.w) o.w = o.group.offsetWidth;
+        o.x += o.dir * (o.base + Math.abs(vel) * .35) * (vel < -1 ? -1 : 1);
+        if (o.x <= -o.w) o.x += o.w;
+        if (o.x > 0) o.x -= o.w;
+        o.track.style.transform = `translate3d(${o.x.toFixed(2)}px,0,0)`;
+      }
+    }
+
+    /* kartu proyek menumpuk */
+    if (desktopMQ.matches) {
+      cards.forEach((c, i) => {
+        const next = cards[i + 1];
+        let pr = 0;
+        if (next) {
+          const nt = next.getBoundingClientRect().top;
+          pr = clamp(1 - (nt - (stickTops[i + 1] || 0)) / (vh * .75), 0, 1);
+        }
+        const inner = c.firstElementChild;
+        inner.style.transform = `scale(${(1 - pr * .06).toFixed(4)})`;
+        inner.lastElementChild.style.opacity = (pr * .6).toFixed(3);
+      });
+    } else {
+      cards.forEach(c => { c.firstElementChild.style.transform = ''; c.firstElementChild.lastElementChild.style.opacity = 0; });
+    }
+
+    /* garis timeline */
+    if (tl) {
+      const r = tl.getBoundingClientRect();
+      const tp = clamp((vh * .62 - r.top) / r.height, 0, 1);
+      tlLine.firstElementChild.style.setProperty('--p', tp.toFixed(3));
+    }
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* ---------- lightbox prestasi ---------- */
+  const lb = $('#lightbox'), lbInner = $('#lbInner'), lbClose = $('#lbClose');
+  const openLB = card => {
+    const item = card.closest('.g-item');
+    const ph = $('.ph', card).cloneNode(true);
+    const cap = $('.g-cap', card).cloneNode(true);
+    cap.className = 'lb-cap';
+    lbInner.textContent = '';
+    lbInner.style.setProperty('--ar', getComputedStyle(item).getPropertyValue('--ar'));
+    lbInner.append(ph, cap);
+    body.classList.add('lb-open');
+    lbClose.focus({ preventScroll: true });
+  };
+  const closeLB = () => body.classList.remove('lb-open');
+  $$('.g-card').forEach(c => {
+    c.addEventListener('click', () => openLB(c));
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(c); } });
+  });
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') { closeLB(); setMenu(false); } });
+
+  /* sentuhan di layar HP juga menggerakkan huruf nama */
+  addEventListener('touchmove', e => {
+    const t = e.touches[0]; if (!t) return;
+    mx = t.clientX; my = t.clientY; hasPointer = true;
+  }, { passive: true });
+  addEventListener('touchend', () => { hasPointer = false; }, { passive: true });
+})();
+</script>
+</body>
+</html>
